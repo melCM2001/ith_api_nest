@@ -1,11 +1,11 @@
-import { User } from './../../../dist/Models/user.model.d';
+import { User } from './../../Models/user.model';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UserService {
     private readonly Users : User[] = [] 
 
-    create( user : User ){
+    create( user : User ) : void{
         this.Users.push(user)
     }
 
@@ -13,8 +13,8 @@ export class UserService {
         return this.Users
     }
 
-    getByEmail( correo : string ) : User {
-        return this.Users.find(value) => User.correo === correo
+    getByEmail( email : string ) : User {
+        return this.Users.find((user) => user.email === email)
     }
 
 }

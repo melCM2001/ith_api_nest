@@ -1,5 +1,5 @@
 import { UserService } from './user.service';
-import { User } from './../../Models/user.model';
+import { User } from './../../Models.user.model';
 import { Body, Controller, Get, Post, Param } from '@nestjs/common';
 
 @Controller('user')
@@ -11,9 +11,7 @@ export class UserController {
     @Post()
     create( @Body() params : User) :void{
         this.userService.create(params)
-        /*console.log('Nombre: '+ params.name, 
-        '\nCorreo: '+ params.email,
-        '\nTelefono: '+ params.phone);*/
+        /*console.log('Nombre: '+ params.name, '\nCorreo: '+ params.email,'\nTelefono: '+ params.phone);*/
     }
 
     @Get('/all')
@@ -22,16 +20,12 @@ export class UserController {
     }
 
     @Get('/:email')
-    getUser(@Param('email') param): User{
-        return this.validateQuest(this.userService.getByEmail(param))
+    getUser(@Param('email') param): User | string{
+        const user = this.userService.getByEmail(param)
+        return user ? user : "El usuario no existe" //operacion ternaria -> primer parametro se evalua a (verdadero) ?(si) :(else)
+        //return user ?? "El usuario no existe" operacion ternaria -> ??
     }
 
-    validateQuest(request: User){
-        if (request != undefined) {
-            return request;
-        } else {
-            console.error('El Usuario no existe');
-            
-        } 
-    }
+    //crear nueva rama -> git checkout -b ValidarUsuario
+    //   -> git add . &&
 }
