@@ -1,15 +1,37 @@
-import { userModel } from './../../Models/user.model';
-import { Body, Controller, Post } from '@nestjs/common';
+import { UserService } from './user.service';
+import { User } from './../../Models/user.model';
+import { Body, Controller, Get, Post, Param } from '@nestjs/common';
 
 @Controller('user')
 export class UserController {
-    constructor(){
+    constructor(private userService : UserService){
 
     }
+
     @Post()
-    create(@Body() params:userModel):void{
-        console.log('El nombre es: '+ params.name, 
-        '\n El mail es: '+ params.gmail,
-        '\n El telefono es: '+ params.phone);
+    create( @Body() params : User) :void{
+        this.userService.create(params)
+        /*console.log('Nombre: '+ params.name, 
+        '\nCorreo: '+ params.email,
+        '\nTelefono: '+ params.phone);*/
+    }
+
+    @Get('/all')
+    getUsers(): User[] {
+        return this.userService.getAll()
+    }
+
+    @Get('/:email')
+    getUser(@Param('email') param): User{
+        return this.validateQuest(this.userService.getByEmail(param))
+    }
+
+    validateQuest(request: User){
+        if (request != undefined) {
+            return request;
+        } else {
+            console.error('El Usuario no existe');
+            
+        } 
     }
 }
