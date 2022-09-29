@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 export class UserService {
     private readonly Users : User[] = [] 
 
-    create( user : User ) : void{
+    create( user : User ){
         this.Users.push(user)
     }
 
@@ -16,5 +16,15 @@ export class UserService {
     getByEmail( email : string ) : User {
         return this.Users.find((user) => user.email === email)
     }
+
+    /*updateUserById(id : number, user : User) : boolean{
+        //crear variable tipo let puede asignarse un valor nuevo 
+        let user_exists = this.Users.find((user) => user.id === id)  //
+        if(user_exists){
+            this.Users[]
+            return true
+        }
+        return false
+    }*/
 
 }
