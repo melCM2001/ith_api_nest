@@ -17,6 +17,8 @@ export class UserService {
         return this.Users.find((user) => user.email === email)
     }
 
+
+    //Test
     /*updateUserById(id : number, user : User) : boolean{
         //crear variable tipo let puede asignarse un valor nuevo 
         let user_exists = this.Users.find((user) => user.id === id)  //
