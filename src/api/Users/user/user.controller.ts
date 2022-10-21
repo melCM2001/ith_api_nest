@@ -1,21 +1,29 @@
+import { User } from './../../../Models/user.model';
+import { Body, Controller, Get, Param, Post,  Put } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from './../../Models/user.model';
-import { Body, Controller, Get, Post, Put, Param } from '@nestjs/common';
+
 
 @Controller('user')
-    export class UserController {
-    constructor(private userService : UserService){
+export class UserController {
+    constructor(private userService: UserService){
 
     }
 
-    @Post()//crear 
-    create( @Body() params : User) :void{
-        this.userService.create(params)
-        //console.log('Nombre: '+ params.name, '\nCorreo: '+ params.email,'\nTelefono: '+ params.phone);
-    }
+    @Post()
+    Create(@Body() params: User):string | boolean{
+        if(this.userService.userExists(Number(params.id))){
+            return "El usuario ya existe"
+        }
+        try {
+            this.userService.create(params)
+            return true
+        } catch (error) {
+            console.log({error})
+        }
 
+    }
     @Get('/all')
-    getUsers(): User[] {
+    getUsers(): User[]{
         return this.userService.getAll()
     }
 
@@ -26,10 +34,10 @@ import { Body, Controller, Get, Post, Put, Param } from '@nestjs/common';
         //return user ?? "El usuario no existe" operacion ternaria -> ??
     }
 
-    /*@Put(/update/:id)
-    actualizarUsuario(@Body() user : User, @Param('id') id){
-        return this.userService.updateUserById(Number(id),user)
-    }*/
+    @Put('/update/:id')
+    updateUser (@Body() user:User, @Param('id') id ){
+        return this.userService.updateUserbyID(Number(id),user)
+    } 
 
     //crear nueva rama -> git checkout -b nombreRama
     //mover a una rama -> git checkout nombreRama
