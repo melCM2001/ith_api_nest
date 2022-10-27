@@ -3,7 +3,7 @@ import { Details } from './details.entity';
 
 @Entity()
 export class Sales{
-
+    //PK
     @PrimaryGeneratedColumn()
     id : number;
 
@@ -13,9 +13,10 @@ export class Sales{
     @Column()
     total : number;
 
+    //FK
     @Column()
-    id_user : number
+    id_user : number;
 
-    @OneToMany(()=>Details,(details)=>details.id_sales)
+    @OneToMany(()=>Details, (details) => details.id_sales)
     details:Details[]
 }

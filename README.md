@@ -1,8 +1,8 @@
 ## Tarea para semana del 17 al 21
-* Crear la entidad de detalle
-* Crear el servicio de detalle
-* Crear el controlador de detalle
-* Insertar la relacion del detalle
+* Crear la entidad de detalle       -> (src/entities/details.entity)
+* Crear el servicio de detalle      -> (src/api/Details/details.service)
+* Crear el controlador de detalle   -> (src/api/Details/details.controller)
+* Insertar la relacion del detalle 
 
 ### TIENE QUE CORRER!
 

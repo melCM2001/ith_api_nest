@@ -10,7 +10,7 @@ export const Connection = TypeOrmModule.forRoot({
     username: 'root',
     password: '',
     database: 'ith-db',
-    entities: [User,Sales,Details],
+    entities: [User,Sales,Details],//aqui se llaman las entidades 
     synchronize: true
 })
 

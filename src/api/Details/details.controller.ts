@@ -4,13 +4,15 @@ import { DetailsService } from './details.service';
 
 @Controller('details')
 export class DetailsController {
-    constructor(private detailsService : DetailsService){
-
-    }
+    constructor(private detailsService : DetailsService){}
 
     @Get()
     findDetails(){
         return this.detailsService.findAllDetails()
     }
-
 }
+
+/* Notas:
+    Comando crea controlador: desde consola -> nest g controller api/Details(direccion)
+
+*/
